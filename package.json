@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "19.x",
-    "npm": "9.x"
+    "node": "16.x",
+    "npm": "8.x"
   },
   "scripts": {
     "start": "vue-cli-service serve",
@@ -20,11 +20,11 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "^5.0.0",
-    "@vue/cli-plugin-eslint": "^5.0.0",
-    "@vue/cli-plugin-router": "^5.0.0",
-    "@vue/cli-plugin-unit-jest": "^5.0.0",
-    "@vue/cli-service": "^5.0.0",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-standard": "^6.1.0",
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
