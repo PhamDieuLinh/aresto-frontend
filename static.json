@@ -1,5 +1,5 @@
 {
-  "root": "dist",
+  "nginx_root": "dist",
   "clean_urls": true,
   "routes": {
     "/**": "index.html"
