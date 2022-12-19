@@ -35,21 +35,21 @@ export default {
   name: 'HomeView',
   data () {
     return {
-      restaurants: [
-        {
-          id: 1,
-          name: 'ChinaTown',
-          adress: 'Weißenseer Weg 23, 34242 Berlin',
-          description: 'Chinesisches Restaurant'
-        },
-        {
-          id: 2,
-          name: 'VietnamTown',
-          adress: 'Aristotelessteig 23, 34243 Berlin',
-          description: 'Vietnamesisches Restaurant'
-        }
-      ]
+      restaurants: []
     }
+  },
+  mounted () {
+    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/restaurants'
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    }
+    fetch(endpoint, requestOptions)
+      .then(response => response.json())
+      .then(result => result.forEach(restaurant => {
+        this.restaurants.push(restaurant)
+      }))
+      .catch(error => console.log('error', error))
   }
 }
 </script>
