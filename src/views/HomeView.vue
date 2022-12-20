@@ -1,18 +1,28 @@
 <template>
   <div class="home">
     <h1>Asiatische Restaurants in Berlin:</h1>
-    <div class="card mb-3" style="max-width: 1200px;">
-      <div class="row g-0">
-        <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
-          <img src="../assets/Restaurant.webp" class="img-fluid rounded-start" style="max-width: 200px;" :alt="restaurant.name">-->
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">{{restaurant.name}}</h5>
-                      <p class="card-text">Adresse: {{restaurant.adress}}</p>
-                      <p class="card-text">Beschreibung: {{restaurant.description}} </p>
-                 </div>
+    <div class="container-fluid" >
+
+      <!--      <div class="row g-0"> >-->
+
+              <div class="row" v-for="restaurant in restaurants" :key="restaurant.id">
+                <div class="card mb-3" style="max-width: 1200px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                <img src="../assets/Restaurant.webp" class="img-fluid rounded-start" style="max-width: 200px;" :alt="restaurant.name">-->
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{restaurant.name}}</h5>
+              <p class="card-text">Adresse: {{restaurant.adress}}</p>
+              <p class="card-text">Beschreibung: {{restaurant.description}} </p>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  </div>
 <!--        <div class="col-md-4">-->
 <!--          <img src="../assets/Restaurant.webp" class="img-fluid rounded-start" style="max-width: 200px;" alt="Muster Restaurant">-->
 <!--        </div>-->
@@ -24,13 +34,9 @@
 <!--            <p class="card-text"><small class="text-muted">Öffnungszeiten: Mon- Son, 12 bis 21 Uhr</small></p>-->
 <!--          </div>-->
 <!--        </div>-->
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-
 export default {
   name: 'HomeView',
   data () {
