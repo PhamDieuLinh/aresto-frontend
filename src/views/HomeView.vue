@@ -20,17 +20,6 @@
       </div>
     </div>
   </div>
-<!--        <div class="col-md-4">-->
-<!--          <img src="../assets/Restaurant.webp" class="img-fluid rounded-start" style="max-width: 200px;" alt="Muster Restaurant">-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--          <div class="card-body">-->
-<!--            <h5 class="card-title">Muster Restaurant</h5>-->
-<!--            <p class="card-text">Adresse: Alexa</p>-->
-<!--            <p class="card-text">Beschreibung: Hier ist Muster Restaurant </p>-->
-<!--            <p class="card-text"><small class="text-muted">Öffnungszeiten: Mon- Son, 12 bis 21 Uhr</small></p>-->
-<!--          </div>-->
-<!--        </div>-->
 </template>
 
 <script>
