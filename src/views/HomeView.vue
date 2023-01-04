@@ -11,7 +11,7 @@
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{restaurant.name}}</h5>
-                <p class="card-text">Adresse: {{restaurant.adress}}</p>
+                <p class="card-text">Adresse: {{restaurant.address}}</p>
                 <p class="card-text">Beschreibung: {{restaurant.description}} </p>
               </div>
             </div>
