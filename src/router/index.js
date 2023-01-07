@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-import KategorieView from '@/views/KategorieView'
-import RErstellenView from '@/views/RErstellenView'
+import BewertungenView from '@/views/BewertungenView'
+import RVerwaltenView from '@/views/RVerwaltenView'
 
 const routes = [
   {
@@ -16,14 +16,16 @@ const routes = [
     component: AboutView
   },
   {
-    path: '/kategorie',
-    name: 'kategorie',
-    component: KategorieView
+    path: '/restaurantverwalten',
+    name: 'restaurantverwalten',
+    component: RVerwaltenView
   },
   {
-    path: '/restauranterstellen',
-    name: 'restauranterstellen',
-    component: RErstellenView
+    path: '/bewertungen/restaurant/:id',
+    name: 'bewertungen',
+    component: BewertungenView,
+    params: true,
+    props: true
   }
 ]
 
