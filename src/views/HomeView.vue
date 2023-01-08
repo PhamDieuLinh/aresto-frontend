@@ -3,13 +3,15 @@
     <div class="row g-0">
       <div id="s" class="col">
         <form class="d-flex" role="search">
-          <input  v-model="searchCrit" class="form-control me-2" type="search" placeholder="Restaurant suchen" aria-label="Suchen" onkeyup="search()" style="max-width: 400px;">
-          <button class="btn btn-outline-succes" type="submit" style="border-color: gold" v-on:click="search">Suchen</button>
+          <input  v-model="searchCrit" class="form-control me-2" type="search" placeholder="Restaurant suchen" aria-label="Suchen" style="max-width: 400px;">
+          <button class="btn btn-outline-succes" type="submit" style="border-color: gold" v-on:click="search()">Suchen</button>
         </form>
       </div>
 
       <div id="dd" class="col">
       <div class="Kategorie">
+        <div class="d-flex justify-content-center">
+          <p style="font-size: 18px;">Kategorie: &nbsp; &nbsp; </p>
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           {{ kategorieParam }}
         </button>
@@ -22,61 +24,64 @@
           <li><a class="dropdown-item" v-on:click="setKategorieParam('VIETNAMESISCH')">VIETNAMESISCH</a></li>
         </ul>
       </div>
+      </div>
     </div>
 
     </div>
     <i class="bi bi-star-fill"></i>
+    <br>
+    <div class="row">
+    <div class="col-md-9">
     <h1>Asiatische Restaurants in Berlin:</h1>
+    </div>
+    <div id="checkbox" class="col-md-2">
+      <br>
+      <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="sort" v-model="sorted">
+      <label class="form-check-label" for="sorted">
+        alphabeltisch sortieren
+      </label>
+    </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+    </div>
+    <br>
     <div class="container-fluid">
-      <div class="row" v-for="restaurant in search(searchCrit)" :key="restaurant.id" >
-        <div class="card mb-3" style="max-width: 1200px;">
-          <div class="row g-0">
-            <div class="col-md-3">
-                <img src="../assets/Restaurant.webp" class="img-fluid rounded-start" style="max-width: 200px;" :alt="restaurant.name">
-            </div>
-            <div class="col">
-              <br>
-              <div class="d-flex">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg>
-              <p class="card-text" style="font-size: 15px">&nbsp; 4</p>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">{{restaurant.name}}</h5>
-                <p class="card-text" style="font-size: 13px">{{restaurant.kategorie}}</p>
-                <p class="card-text">Adresse: {{restaurant.address}}</p>
-                <p class="card-text">Beschreibung: {{restaurant.description}} </p>
-                <a :href=" '/bewertungen/restaurant/' + restaurant.id" class="stretched-link">Zu den Bewertungen</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <restaurant-card-list :restaurants="search(searchCrit)"></restaurant-card-list>
     </div>
   </div>
 </template>
 
 <script>
+import RestaurantCardList from '@/components/RestaurantCardList'
 export default {
   name: 'HomeView',
+  components: { RestaurantCardList },
   data () {
     return {
       restaurants: [],
+      restaurantsCopy: [],
       filteredRestaurants: [],
+      filteredRestaurantsCopy: [],
       searchCrit: '',
-      kategorieParam: 'ALLE'
+      kategorieParam: 'ALLE',
+      sorted: false
     }
   },
   methods: {
     search (crit) {
+      console.log(this.sorted)
       if (this.kategorieParam === 'ALLE') {
         this.restaurants = this.restaurants.filter(
           it => crit.length < 1 ||
             it.name.toLowerCase().includes(crit.toLowerCase()))
-        return this.restaurants
+        if (!this.sorted) {
+          return this.restaurants
+        } else {
+          this.restaurantsCopy = this.restaurants
+          return this.restaurantsCopy.sort(this.compareNames)
+        }
       } else {
         const filters = { kategorie: this.kategorieParam }
         this.filteredRestaurants = this.restaurants.filter(res =>
@@ -84,12 +89,29 @@ export default {
         this.filteredRestaurants = this.filteredRestaurants.filter(
           it => crit.length < 1 ||
             it.name.toLowerCase().includes(crit.toLowerCase()))
-        return this.filteredRestaurants
+        if (!this.sorted) {
+          return this.filteredRestaurants
+        } else {
+          this.filteredRestaurantsCopy = this.filteredRestaurants
+          return this.filteredRestaurantsCopy.sort(this.compareNames)
+        }
       }
     },
     setKategorieParam (kat) {
       this.kategorieParam = kat
       return this.kategorieParam
+    },
+    compareNames (a, b) {
+      const nameA = a.name.toLowerCase()
+      const nameB = b.name.toLowerCase()
+
+      let comparison = 0
+      if (nameA > nameB) {
+        comparison = 1
+      } else if (nameA < nameB) {
+        comparison = -1
+      }
+      return comparison
     }
   },
   mounted () {
