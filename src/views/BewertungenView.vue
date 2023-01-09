@@ -15,13 +15,15 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid" id="inputform">
     <form class="row g-3 needs-validation" novalidate>
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Neue Bewertung</h1>
         </div>
         <div class="modal-body">
+          <div class="row">
+               <div class="col-4">
           <div class="mb-3">
             <label for="restaurant-addresse" class="form-label">Author Name</label>
             <input type="text" class="form-control" id="author-name" v-model="authorName" required>
@@ -29,6 +31,23 @@
               Ihren Name bitte eingeben
             </div>
           </div>
+               </div>
+          <div class="col-2">
+              <label for="kategorie" class="form-label">Stern</label>
+              <select id="autoSizingSelect" class="form-select" v-model="rating" required>
+                <option selected disabled>Auswählen...</option>
+                <option value="VERYBAD">1</option>
+                <option value="BAD">2</option>
+                <option value="OK">3</option>
+                <option value="GOOD">4</option>
+                <option value="VERYGOOD">5</option>
+              </select>
+              <div class="invalid-feedback">
+                Bitte ein Kategorie auswählen.
+              </div>
+            </div>
+          </div>
+
           <div class="mb-3">
             <label for="restaurant-beschreibung" class="form-label">Review</label>
             <input type="text" class="form-control" id="re-view" v-model="review" required>
@@ -36,23 +55,7 @@
               Review bitte eingeben.
             </div>
           </div>
-          <div class="mb-3">
-            <label for="kategorie" class="form-label">Stern</label>
-            <select id="autoSizingSelect" class="form-select" v-model="rating" required>
-              <option selected disabled>Auswählen...</option>
-              <option value="VERYBAD">1</option>
-              <option value="BAD">2</option>
-              <option value="OK">3</option>
-              <option value="GOOD">4</option>
-              <option value="VERYGOOD">5</option>
-            </select>
-            <div class="invalid-feedback">
-              Bitte ein Kategorie auswählen.
-            </div>
-          </div>
-          <div>
-              <Rating></Rating>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="submit" @click="createReview(id)" >Speichern</button>
@@ -79,21 +82,18 @@
 </template>
 
 <script>
-import Rating from '@/components/Rating'
 export default {
   name: 'BewertungenView',
   data () {
     return {
-      restaurant: [],
+      restaurant: { type: Object },
       bewertungen: [],
       authorName: '',
       review: '',
-      rating: 0,
-      everageRating: 0
+      rating: 0
     }
   },
   props: ['id'],
-  components: [Rating],
   methods: {
     createReview (rid) {
       const valid = this.validate()
@@ -164,4 +164,5 @@ export default {
 
 <style scoped>
 #st{text-align: center}
+#inputform{max-width: 1000px;}
 </style>

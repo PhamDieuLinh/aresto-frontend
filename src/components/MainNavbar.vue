@@ -1,5 +1,5 @@
 <template>
- <nav class="navbar navbar-expand-lg bg-light">
+  <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">Aresto</router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-  </nav>
+   </nav>
 </template>
 
 <script>

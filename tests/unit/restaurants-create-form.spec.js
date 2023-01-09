@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import RErstellen from '@/components/RErstellen'
 
-describe('Testing PersonsCreateForm.vue', () => {
+describe('Testing RestaurantsCreateForm.vue', () => {
   it('should not show form by default', () => {
     // when
     const wrapper = mount(RErstellen)

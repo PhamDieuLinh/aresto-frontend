@@ -4,7 +4,7 @@
       <div id="s" class="col">
         <form class="d-flex" role="search">
           <input  v-model="searchCrit" class="form-control me-2" type="search" placeholder="Restaurant suchen" aria-label="Suchen" style="max-width: 400px;">
-          <button class="btn btn-outline-succes" type="submit" style="border-color: gold" v-on:click="search()">Suchen</button>
+          <button class="btn btn-outline" type="submit" style="border-color: gold" v-on:click="search()">Neue Suche</button>
         </form>
       </div>
 
@@ -31,15 +31,15 @@
     <i class="bi bi-star-fill"></i>
     <br>
     <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
     <h1>Asiatische Restaurants in Berlin:</h1>
     </div>
-    <div id="checkbox" class="col-md-2">
+    <div id="checkbox" class="col-md-4">
       <br>
       <div class="form-check">
       <input class="form-check-input" type="checkbox" id="sort" v-model="sorted">
       <label class="form-check-label" for="sorted">
-        alphabeltisch sortieren
+        nach Anzahl Bewertungen sortieren
       </label>
     </div>
     </div>
@@ -80,7 +80,7 @@ export default {
           return this.restaurants
         } else {
           this.restaurantsCopy = this.restaurants
-          return this.restaurantsCopy.sort(this.compareNames)
+          return this.restaurantsCopy.sort(this.compareBewertungIds)
         }
       } else {
         const filters = { kategorie: this.kategorieParam }
@@ -93,7 +93,7 @@ export default {
           return this.filteredRestaurants
         } else {
           this.filteredRestaurantsCopy = this.filteredRestaurants
-          return this.filteredRestaurantsCopy.sort(this.compareNames)
+          return this.filteredRestaurantsCopy.sort(this.compareBewertungIds)
         }
       }
     },
@@ -101,14 +101,11 @@ export default {
       this.kategorieParam = kat
       return this.kategorieParam
     },
-    compareNames (a, b) {
-      const nameA = a.name.toLowerCase()
-      const nameB = b.name.toLowerCase()
-
+    compareBewertungIds (a, b) {
       let comparison = 0
-      if (nameA > nameB) {
+      if (a.bewertungIds.length < b.bewertungIds.length) {
         comparison = 1
-      } else if (nameA < nameB) {
+      } else if (a.bewertungIds.length > b.bewertungIds.length) {
         comparison = -1
       }
       return comparison
